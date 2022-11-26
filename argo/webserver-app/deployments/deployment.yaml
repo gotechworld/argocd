@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: webserver-app
-        image: aimvector/python:1.0.1
+        image: aimvector/python:metrics
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
