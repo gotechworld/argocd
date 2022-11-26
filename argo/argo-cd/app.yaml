@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: webserver-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/petrugiurca/argocd.git
+    targetRevision: HEAD
+    path: argo/webserver-app
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: webserver-app
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
