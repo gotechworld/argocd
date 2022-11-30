@@ -21,7 +21,8 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 Now, please go ahead and check if the installation was successful. First, check if all Argo CD deployments are healthy:
 
-```kubectl get deploy -n argocd
+```
+kubectl get deploy -n argocd
 ```
 
 The output looks similar to (check the ```READY``` column - all ```Pods``` must be running):
@@ -48,14 +49,16 @@ By default, the Argo CD API server is not exposed with an external IP. To access
 
 Change the argocd-server service type to LoadBalancer:
 
-```kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 ```
 
 + Port Forwarding
 
 Kubectl port-forwarding can also be used to connect to the API server without exposing the service.
 
-```kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
 The API server can then be accessed using __https://localhost:8080__
@@ -64,7 +67,8 @@ The API server can then be accessed using __https://localhost:8080__
 
 The initial password for the ```admin``` account is auto-generated and stored as clear text in the field ```password``` in a secret named ```argocd-initial-admin-secret``` in your Argo CD installation namespace. You can simply retrieve this password using ```kubectl```:
 
-```kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
 
